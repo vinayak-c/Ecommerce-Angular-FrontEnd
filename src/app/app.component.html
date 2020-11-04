@@ -4,23 +4,17 @@
   <aside class="menu-sidebar d-none d-lg-block">
     <div class="logo">
       <a href="#">
-        <img src="assets/images/logo.png" alt="luv2shop" class="img-responsive">
+        <img src="assets/images/logo.png" alt="VinnysShop" class="img-responsive">
       </a>
     </div>
     <div class="menu-sidebar-content js-scrollbar1">
       <nav class="navbar-sidebar">
         <ul class="list-unstyled navbar-list">
           <li>
-            <a href="#">Books</a>
+            <a routerLink="/category/1" routerActiveLink="active-link">Books</a>
           </li>
           <li>
-            <a href="#">Coffee Mugs</a>
-          </li>
-          <li>
-            <a href="#">Mouse Pads</a>
-          </li>
-          <li>
-            <a href="#">Luggage Tags</a>
+            <a routerLink="/category/2" routerActiveLink="active-link">Coffee Mugs</a>
           </li>
         </ul>
       </nav>
@@ -54,6 +48,8 @@
     <!-- END HEADER DESKTOP-->
 
     <!-- MAIN CONTENT-->
-    <app-product-list></app-product-list>
+    <router-outlet></router-outlet>
+    <!--<app-product-list></app-product-list>-->
+  
   </div>
 </div>
