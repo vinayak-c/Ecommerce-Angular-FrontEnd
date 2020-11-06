@@ -1,5 +1,6 @@
 export class Product {
 
+    id:String;
     sku:String;
     name:String;
     description:String;
