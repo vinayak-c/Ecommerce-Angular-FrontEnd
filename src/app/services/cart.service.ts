@@ -21,40 +21,37 @@ export class CartService {
     let existingCartItem: CartItem = undefined;
 
     if (this.cartItems.length > 0) {
+      
       //find item in the cart based on item id
 
-      for (let tempCartItem of this.cartItems) {
-        if (tempCartItem.id === theCartItem.id) {
-          existingCartItem = tempCartItem;
-          break;
-        }
-      }
+      existingCartItem = this.cartItems.find(tempCartItem => tempCartItem.id === theCartItem.imageUrl);
 
       //check if we found it
-      alreadyExitsInCart=(existingCartItem!=undefined);
+      alreadyExitsInCart = (existingCartItem != undefined);
+      
     }
 
-     if(alreadyExitsInCart){
-       //increment  the quantity
-       existingCartItem.quantity++;
-     }
-     else{
-       //just add the item to the array
-       this.cartItems.push(theCartItem);
-     }
+    if (alreadyExitsInCart) {
+      //increment  the quantity
+      existingCartItem.quantity++;
+    }
+    else {
+      //just add the item to the array
+      this.cartItems.push(theCartItem);
+    }
 
-     //compute cart total price and total quantity
-     this.computeCartTotals(); 
+    //compute cart total price and total quantity
+    this.computeCartTotals();
   }
 
   computeCartTotals() {
-    
-    let totalPriceValue:number=0;
-    let totalQuantityValue:number=0;
 
-    for(let currentCartItem of this.cartItems){ 
-      totalPriceValue+=currentCartItem.quantity*currentCartItem.unitPrice;
-      totalQuantityValue+=currentCartItem.quantity;
+    let totalPriceValue: number = 0;
+    let totalQuantityValue: number = 0;
+
+    for (let currentCartItem of this.cartItems) {
+      totalPriceValue += currentCartItem.quantity * currentCartItem.unitPrice;
+      totalQuantityValue += currentCartItem.quantity;
     }
 
     //publish the new values ... all subscribers will receive the new data
