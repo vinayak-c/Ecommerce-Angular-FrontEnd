@@ -6,7 +6,7 @@ import { CartItem } from '../common/cart-item';
   providedIn: 'root'
 })
 export class CartService {
-
+ 
   cartItems: CartItem[] = [];
 
   totalPrice: Subject<number> = new Subject<number>();
@@ -24,7 +24,7 @@ export class CartService {
       
       //find item in the cart based on item id
 
-      existingCartItem = this.cartItems.find(tempCartItem => tempCartItem.id === theCartItem.imageUrl);
+      existingCartItem = this.cartItems.find(tempCartItem => tempCartItem.id === theCartItem.id);
 
       //check if we found it
       alreadyExitsInCart = (existingCartItem != undefined);
@@ -58,6 +58,31 @@ export class CartService {
     this.totalPrice.next(totalPriceValue);
     this.totalQuantity.next(totalQuantityValue);
 
+  }
+
+  decrementQuantity(theCartItem: CartItem) {
+    
+    theCartItem.quantity--;
+
+    if(theCartItem.quantity===0){
+      this.remove(theCartItem);
+    }
+    else{
+      this.computeCartTotals();
+    }
+
+  }
+
+  remove(theCartItem: CartItem) {
+
+    //get index of the item in the array
+    const itemIndex=this.cartItems.findIndex(tempCartItem=>tempCartItem.id===theCartItem.id);
+
+    //if found , remove the item from the array at the given index
+    if(itemIndex>-1){
+      this.cartItems.splice(itemIndex,1);
+      this.computeCartTotals();
+    }
   }
 
 }
