@@ -14,11 +14,11 @@ export class CheckoutComponent implements OnInit {
   totalPrice: number = 0;
   totalQuantity: number = 0;
 
-  creditCardYears:number[]=[];
-  creditCardMonths:number[]=[];
+  creditCardYears: number[] = [];
+  creditCardMonths: number[] = [];
 
   constructor(private formBuilder: FormBuilder,
-              private vinayakshopformservice:VinayakShopFormService) { }
+    private vinayakshopformservice: VinayakShopFormService) { }
 
   ngOnInit(): void {
 
@@ -54,21 +54,21 @@ export class CheckoutComponent implements OnInit {
 
 
     //populate credit card months
-    const startMonth:number=new Date().getMonth()+1;
-    console.log("start month: "+startMonth);
+    const startMonth: number = new Date().getMonth() + 1;
+    console.log("start month: " + startMonth);
 
     this.vinayakshopformservice.getCreditCardMonths(startMonth).subscribe(
-      data=>{
-        console.log("Retrived Credit Card Months: "+JSON.stringify(data));
-        this.creditCardMonths=data;
+      data => {
+        console.log("Retrived Credit Card Months: " + JSON.stringify(data));
+        this.creditCardMonths = data;
       }
     );
 
     //populate credit card years
     this.vinayakshopformservice.getcreditcardYears().subscribe(
-      data=>{
-        console.log("Retrived Credit Card Months: "+JSON.stringify(data));
-        this.creditCardYears=data;
+      data => {
+        console.log("Retrived Credit Card Months: " + JSON.stringify(data));
+        this.creditCardYears = data;
       }
     )
 
@@ -82,11 +82,37 @@ export class CheckoutComponent implements OnInit {
   copyShippingAddressToBillingAddress(event) {
 
     if (event.target.checked) {
-        this.checkoutFormGroup.controls.billingAddress.
+      this.checkoutFormGroup.controls.billingAddress.
         setValue(this.checkoutFormGroup.controls.shippingAddress.value);
     } else {
-        this.checkoutFormGroup.controls.billingAddress.reset();
+      this.checkoutFormGroup.controls.billingAddress.reset();
     }
+  }
+
+  handleMonthsAndYears() {
+
+    const creditCardFormGroup = this.checkoutFormGroup.get('creditCard');
+
+    const currentYear: number = new Date().getFullYear();
+    const selectedYear: number = Number(creditCardFormGroup.value.expirationYear);
+
+    //if the current year equals the selected year, then start with the current month
+
+    let startMonth: number;
+
+    if (currentYear === selectedYear) {
+      startMonth = new Date().getMonth() + 1;
+    }
+    else {
+      startMonth = 1;
+    }
+
+    this.vinayakshopformservice.getCreditCardMonths(startMonth).subscribe(
+      data=>{
+        console.log("Retrieved credit card months: "+JSON.stringify(data));
+        this.creditCardMonths=data;
+      }    
+    );
   }
 
 }
