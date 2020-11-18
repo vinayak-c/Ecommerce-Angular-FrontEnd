@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Country } from 'src/app/common/country';
+import { State } from 'src/app/common/state';
 import { VinayakShopFormService } from 'src/app/services/vinayak-shop-form.service';
 
 @Component({
@@ -20,10 +21,13 @@ export class CheckoutComponent implements OnInit {
 
   countries:Country[]=[]; 
 
+  shippingAddressStates:State[]=[];
+  billingAddressStates:State[]=[];
+  
   constructor(private formBuilder: FormBuilder,
     private vinayakshopformservice: VinayakShopFormService) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {  
 
     this.checkoutFormGroup = this.formBuilder.group({
       customer: this.formBuilder.group({
@@ -88,6 +92,8 @@ export class CheckoutComponent implements OnInit {
   onSubmit() {
     console.log("Handling the submit button");
     console.log(this.checkoutFormGroup.get('customer').value);
+    console.log("The shipping address country is: "+this.checkoutFormGroup.get('shippingAddress').value.country.name);
+    console.log("The shipping address state is: "+this.checkoutFormGroup.get('shippingAddress').value.state.name);
   }
 
   copyShippingAddressToBillingAddress(event) {
@@ -126,4 +132,29 @@ export class CheckoutComponent implements OnInit {
     );
   }
 
+  getStates(formGroupName:string){
+
+    const formGroup=this.checkoutFormGroup.get(formGroupName);
+
+    const countryCode=formGroup.value.country.code;
+    const countryName=formGroup.value.country.name;
+
+    console.log(`${formGroupName} country code: ${countryCode}`);
+    console.log(`${formGroupName} country name: ${countryName}`);
+
+    this.vinayakshopformservice.getStates(countryCode).subscribe(
+      data=>{
+         
+        if(formGroupName==='shippingAddress'){
+          this.shippingAddressStates=data;
+        }
+        else{
+          this.billingAddressStates=data;
+        }
+
+        //select first item by default
+        formGroup.get('state').setValue(data[0]);
+      }
+    );
+  }
 }
