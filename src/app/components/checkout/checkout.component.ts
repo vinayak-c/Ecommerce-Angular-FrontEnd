@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Country } from 'src/app/common/country';
 import { VinayakShopFormService } from 'src/app/services/vinayak-shop-form.service';
 
 @Component({
@@ -16,6 +17,8 @@ export class CheckoutComponent implements OnInit {
 
   creditCardYears: number[] = [];
   creditCardMonths: number[] = [];
+
+  countries:Country[]=[]; 
 
   constructor(private formBuilder: FormBuilder,
     private vinayakshopformservice: VinayakShopFormService) { }
@@ -71,6 +74,14 @@ export class CheckoutComponent implements OnInit {
         this.creditCardYears = data;
       }
     )
+
+    //populate countries
+    this.vinayakshopformservice.getCountries().subscribe(
+      data=>{
+        console.log("Retrived countries: "+JSON.stringify(data));
+        this.countries=data; 
+      }
+    );
 
   }
 
