@@ -1,7 +1,7 @@
 export class Country {
 
-    id:number;
-    code:String;
-    name:String;
-    
+    id: number;
+    code: string;
+    name: string;
+
 }
