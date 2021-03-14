@@ -187,8 +187,9 @@
                                         Zip Code is Required
                                     </div>
 
-                                    <div *ngIf="shippingAddressZipCode.errors.minlength">
-                                        Zip code must be at least 2 characters long
+                                   
+                                    <div *ngIf="shippingAddressZipCode.errors.pattern">
+                                        Zip code can only contain 6 digits
                                     </div>
 
                                 </div>
@@ -313,8 +314,8 @@
                                         Zip Code is Required
                                     </div>
 
-                                    <div *ngIf="billingAddressZipCode.errors.minlength">
-                                        Zip code must be at least 2 characters long
+                                    <div *ngIf="billingAddressZipCode.errors.pattern">
+                                        Zip code can only contain 6 digits
                                     </div>
 
                                 </div>
