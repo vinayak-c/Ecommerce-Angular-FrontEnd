@@ -9,7 +9,7 @@ import { OktaAuthService } from '@okta/okta-angular';
 export class LoginStatusComponent implements OnInit {
 
   isAuthenticated: boolean = false;
-  userFullName: String;
+  userFullName: string;
 
   constructor(private oktaAuthService: OktaAuthService) { }
 
