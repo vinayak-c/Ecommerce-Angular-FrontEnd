@@ -2,6 +2,7 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/c
 import { Injectable } from '@angular/core';
 import { OktaAuthService } from '@okta/okta-angular';
 import { from, Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,8 @@ export class AuthInterceptorService implements HttpInterceptor {
   private async handleAccess(request: HttpRequest<any>, next: HttpHandler): Promise<HttpEvent<any>> {
 
     //adding access token only for secured endpoints
-    const securedEndpoints = ['http://localhost:8080/api/orders'];
+    const theEndPoint = environment.vinayakecomUrl + '/orders'
+    const securedEndpoints = [theEndPoint];
 
     if (securedEndpoints.some(url => request.urlWithParams.includes(url))) {
 
