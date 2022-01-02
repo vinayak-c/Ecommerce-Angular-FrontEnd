@@ -12,7 +12,7 @@ import { State } from '../common/state';
 export class VinayakShopFormService {
 
   private countriesUrl = environment.vinayakecomUrl + '/countries';
-  private statesUrl= environment.vinayakecomUrl + 'states';
+  private statesUrl= environment.vinayakecomUrl + '/states';
 
   constructor(private httpClient:HttpClient) { }
 
