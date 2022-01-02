@@ -1,27 +1,31 @@
-# AngularEcommerce
+# E-commerce Application based on Spring Boot back-end and Angular front-end
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.7.
+## Description:
+Application is build using Angular as the core framework and uses OKTA OIDC for handling security and uses Spring Boot backend API.
+Project is still under development and I keep on adding new features, fixing bugs. 
+This Project was started to learn Angular and How to integrate Angular applications to Spring based applications.
 
-## Development server
+## Refer GIF's for some of the features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+### Login
+![Login](./gif/loginfeature.gif)
 
-## Code scaffolding
+### Product category and Pagination support
+![Product Category](./gif/product_category.gif)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Searching Support
+![search](./gif/search_orders.gif)
 
-## Build
+### Order checkout
+![Order Checkout](./gif/cart_order.gif)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+### Logout
+![Login](./gif/logout.gif)
 
-## Running unit tests
+## Link to Spring Boot Backend:
+[E-Commerce Spring Backend](https://github.com/vinayak-c/Ecommerce-SpringBoot-BackEnd-)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+## Credits:
+This project was part of a course on udemy by Chad Darby and Harinath Kuntamukkala.
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
